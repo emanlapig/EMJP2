@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>EMJP2</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="style.css" type="text/css">
+
+	<script type="text/javascript" src="lib/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="lib/angular.min.js"></script>
+	<script type="text/javascript" src="Main.js"></script>
+</head>
+
+<body onload="init()" ng-app="emjpModule">
+	<div id="word-entry" ng-controller="wordEntryController">
+		<div id="word-entry-step1" class="fw-block">
+			Form 1
+			<form>
+				<input type="text" id="input-word" name="inputWord" placeholder="{{word}}" ng-model="word"></input><br>
+				<select id="select-type" name="selectType">
+					<option value="noun">Noun</option>
+					<option value="verb">Verb</option>
+				</select><br>
+				<input type="button" ng-click="wordEntryStep2()" value="Next"></input>
+			</form>
+		</div>
+		<div id="word-entry-step2" class="fw-block">
+			Form 2
+			<form>
+				<div class="small-block" ng-repeat="value in wordSplit track by $index">
+					<input type="text" class="fg-input" id="fg-input{{$index}}"></input><br>
+					<h3>{{value}}</h3>
+				</div><br>
+				<input type="button" ng-click="wordEntryStep3()" value="Next"></input>
+			</form>
+		</div>
+		<div id="word-entry-step3" class="fw-block">
+			Form 3
+			<form>
+				<div class="small-block" ng-repeat="value in wordSplit track by $index">
+					{{wordFg[$index]}}<br>
+					<h4>{{value}}</h4>
+				</div><br>
+				<textarea rows="3" id="input-def" name="inputDef" placeholder="definition"></textarea><br>
+				<input type="button" ng-click="wordSubmit()" value="Submit"></input>
+			</form>
+		</div>
+	</div>
+	<div id="vocab-list" ng-controller="vocabListController">
+		<div class="fw-block" ng-repeat="word in vocabList track by $index">
+			{{word.word}} - {{word.wordRead}} ({{word.type}}) {{word.def}}
+		</div>
+	</div>
+</body>
+
+</html>

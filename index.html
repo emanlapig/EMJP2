@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>EMJP2</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="style.css" type="text/css">
+
+	<script type="text/javascript" src="lib/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.pep.js"></script>
+
+	<script type="text/javascript" src="lib/angular.min.js"></script>
+	<script type="text/javascript" src="lib/angular-touch.js"></script>
+
+	<script type="text/javascript" src="lib/gs/TimelineLite.min.js"></script>
+    <script type="text/javascript" src="lib/gs/TweenMax.min.js"></script>
+    <script type="text/javascript" src="lib/gs/EasePack.min.js"></script>
+
+    <script type="text/javascript" src="Main.js"></script>
+</head>
+
+<body onload="init()" ng-app="emjpModule">
+	<script type="text/javascript" src="lib/bootstrap/bootstrap.min.js"></script>
+	<div id="status-bar-guide"></div>
+
+	<!-- START PAGE CONTAINER -->
+	<div id="page-container" ng-controller="wordEntryController">
+
+		<!-- WORD ENTRY PAGE -->
+		<div id="word-entry" class="page">
+			<a href="javascript:hideForm()"><div id="word-entry-cancel">Cancel</div></a>
+			<div id="word-entry-step1" class="sub-page">
+				<input type="text" id="input-word" name="inputWord" placeholder="Enter a Word"></input><br><br>
+				<select id="select-type" name="selectType">
+					<option value="n">Noun</option>
+					<option value="v">Verb</option>
+				</select><br><br><br>
+				<input type="button" ng-click="wordEntryStep2()" value="Next"></input>
+			</div>
+			<div id="word-entry-step2" class="sub-page">
+				<h2>Enter a Reading</h2>
+				<div class="small-block" ng-repeat="value in wordSplit track by $index">
+					<input type="text" class="fg-input" id="fg-input{{$index}}"></input><br>
+					<span class="large-kanji">{{value}}</span>
+				</div><br><br>
+				<input type="button" ng-click="specialReading()" value="Special Reading"></input>
+				<input type="button" ng-click="wordEntryBack1()" value="Back"></input>
+				<input type="button" ng-click="wordEntryStep3()" value="Next"></input>
+			</div>
+			<div id="word-entry-step3" class="sub-page">
+				<h2>Enter a Definition</h2>
+				<div class="small-block" ng-repeat="value in wordSplit track by $index">
+					<span class="fg">{{wordFg[$index]}}</span><br>
+					<span class="large-kanji">{{value}}</span>
+				</div><br>
+				<textarea rows="3" id="input-def" name="inputDef" placeholder="definition"></textarea><br>
+				<input type="button" ng-click="wordEntryBack2()" value="Back"></input>
+				<input type="button" ng-click="wordSubmit()" id="word-entry-submit" value="Submit"></input>
+			</div>
+		</div>
+
+		<!-- VOCABULARY LIST PAGE -->
+		<div id="vocab-list" class="page" ng-init="loadList()">
+			<div class="list-bg"></div>
+			<!-- BEGIN word listing template -->
+			<div class="item-wrap" ng-repeat="word in vocabList track by $index">
+				<div class="item" id="item{{word.ind}}">
+					<div class="item-shield"></div>
+					<span class="vocab-list-word">{{word.word}}</span>&nbsp;<span class="vocab-list-reading">{{word.wordRead}}</span>&nbsp;<span class="vocab-list-type">({{word.type}})<br>
+					<span class="vocab-list-def">{{word.def | cut:false:50:' ...'}}</span>
+				</div>
+				<div class="item-btns">
+					<span class="glyphicon glyphicon-pencil" id="btn1-edit{{word.ind}}" aria-hidden="true" ng-click="showEditForm(word.ind)"></span><span class="glyphicon glyphicon-remove" id="btn1-delete{{word.ind}}" aria-hidden="true" ng-click="destroy(word.ind);"></span>
+				</div>
+			</div>
+			<!-- END word listing template -->
+			<div class="list-spacer"></div>
+		</div>
+
+		<!-- VIEW WORD PAGE -->
+		<div id="view-word" class="page">
+			<a href="javascript:hideWordView()"><div id="word-entry-cancel" class="cancel">Back</div></a>
+			<div id="view-word-pg1" class="sub-page">
+				<div class="small-block" ng-repeat="value in wordSplit track by $index">
+					<span class="fg">{{wordFg[$index]}}</span><br>
+					<span class="large-kanji">{{value}}</span>
+				</div><br><br>
+				({{wordType}}) {{wordDef}}
+			</div>
+		</div>
+
+		<!-- SETTINGS PAGE -->
+		<div id="settings-page" class="page">
+			<div id="settings-pg1" class="sub-page">
+				<div id="show-storage-btn" class="settings-pg-btn" onclick="showSettingsPg2()" ontouchend="showSettingsPg2()">Manage LocalStorage</div><br>
+			</div>
+			<div id="settings-pg2" class="sub-page">
+				<div class="settings-pg-btn" onclick="hideSettingsPg2()" ontouchend="hideSettingsPg2">Go Back</div><br><br>
+				Usage: <span id="usage-write"></span> / 2.5Mb<br><br>
+				<div id="clear-storage-btn" class="settings-pg-btn" onclick="clearLocalStorage()" ontouchend="clearLocalStorage()">Clear LocalStorage</div><br><br>
+				LocalStorage:<br>
+				<div id="ls-write"></div>
+			</div>
+		</div>
+
+		<!-- HEADER -->
+		<div id="header-bar">
+			<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+			<div class="header-title">Vocabulary List</div>
+		</div>
+		<a id="sidebar-btn" href="javascript:openSidebar();"><div id="header-btn-area"></div></a>
+		
+		<!-- FOOTER -->
+		<div id="footer-bar">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+		</div>
+		<a href="javascript:resetForm();"><div id="footer-btn-area"></div></a>
+
+		<a href="javascript:closeSidebar();"><div id="close-sidebar-area"></div></a>
+	</div>
+	<!-- END PAGE CONTAINER -->
+
+	<!-- SIDEBAR -->
+	<div id="sidebar">
+		<div class="sidebar-item">Vocabulary List</div>
+		<div class="sidebar-item" onclick="showSettings()" ontouchend="showSettings()">Settings</div>
+	</div>
+
+</body>
+
+</html>

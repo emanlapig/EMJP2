@@ -1,0 +1,366 @@
+/* MAIN CSS STYLESHEET */
+
+/* GLOBAL STYLES */
+@font-face {
+ 	font-family: 'Muli';
+ 	font-style: normal;
+ 	font-weight: 400;
+ 	src: local('Muli-Regular'), url(lib/fonts/Muli-Regular.ttf) format('truetype');
+}
+html, body {
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+body {
+	background-color:#008A8A;
+}
+div, label, input, select, button, ul, li {
+	font-family:'Muli',sans-serif;
+}
+.hidden {
+	display:none;
+}
+.fw-block {
+	display:inline-block; position:relative;
+	padding:10px; margin:10px 0px;
+	width:100%; height:auto;
+	border:1px solid black;
+	float:left;
+}
+.small-block {
+	display:inline-block; position:relative;
+	padding:2px;
+	text-align:center;
+}
+input, textarea {
+	width:70%;
+	margin:5px 0px;
+	-moz-user-select:text;
+	-webkit-user-select:text;
+	-ms-user-select:text;
+}
+input:focus, textarea:focus {
+	outline:0;
+}
+
+
+/************* PAGE CONTAINER ***************/
+
+#page-container {
+	display:block; position:absolute;
+	top:0px; left:0px;
+	width:100%; height:100%;
+	padding-right:10px; padding-left:10px;
+	float:left;
+	background-color:#DCE4E8;
+	box-shadow: -2px 2px 30px #333333;
+	overflow:hidden;
+}
+.page {
+	display:block; position:absolute;
+	top:0px; left:0px;
+	margin-top:64px;
+	width:100%; height:100%;
+	background-color:#ffffff;
+}
+.sub-page {
+	display:block; position:absolute;
+	top:0px; left:0px;
+	width:100%; height:100%;
+}
+.cancel {
+	display:block; position:absolute;
+	left:10px; top:10px;
+}
+
+
+
+/************* NEW WORD ENTRY ***************/
+#word-entry {
+	z-index:2;
+	margin-left:110%;
+}
+#word-entry .sub-page {
+	text-align:center;
+	background-color:#ffffff;
+}
+#word-entry-step1 {
+	margin-top:100px;
+	margin-left:0%;
+	z-index:2;
+}
+#word-entry-step2 {
+	margin-top:60px;
+	margin-left:100%;
+	z-index:3;
+}
+#word-entry-step3 {
+	margin-top:60px;
+	margin-left:100%;
+	z-index:4;
+}
+#word-entry .sub-page input[type="text"] {
+	text-align:center;
+	font-size:32px;
+	border:none;
+}
+.fg-input {
+	width:60px;
+	font-size:14px!important;
+	background-color:#DCE4E8;
+}
+.fg {
+	font-size:12px;
+}
+
+/************* VOCAB LIST ***************/
+
+#vocab-list {
+	z-index:1;
+}
+.list-bg {
+	position:absolute; display:block;
+	width:100%; height:150%;
+	left:0px; top:0px;
+	padding:0px; margin:0px;
+	background-color:#DCE4E8;
+	z-index:1;
+}
+.list-spacer {
+	position:relative; display:block;
+	width:100%; height:100%;
+	padding:0px; margin:0px;
+	background-color:transparent;
+	z-index:5;
+}
+.item-wrap {
+	display:block; position:relative;
+	height:50px; width:100%;
+	padding:0px;
+}
+.item {
+	display:block; position:relative;
+	background-color:#ffffff;
+	font-family:'Muli',sans-serif;
+	top:0px; left:0px;
+	height:50px; width:100%;
+	padding-left:12px; padding-top:4px;
+	margin-left:0px;
+	border-bottom:1px solid #B0B6BA;
+	overflow:visible;
+	z-index:5;
+}
+.item-shield {
+	display:block; position:absolute;
+	left:0px; top:0px;
+	width:100%; height:100%;
+	z-index:6;
+}
+.item-btns {
+	display:block; position:absolute;
+	height:50px; width:100px;
+	padding:0px; margin:0px;
+	top:0px; right:0px;
+	background-color:#ff0000;
+	z-index:2;
+	box-sizing:border-box;
+	overflow:hidden;
+}
+#vocab-list .glyphicon {
+	position:relative; display:inline-block;
+	width:50px; height:50px;
+	padding:0px; padding-top:4px; margin:0px;
+	text-align:center;
+	line-height:40px;
+	color:#ffffff;
+	top:0px;
+	z-index:2;
+	box-sizing:border-box;
+}
+#vocab-list .glyphicon:active {
+	background-color:#000000;
+}
+.glyphicon-pencil {
+	border-right:1px solid #ffffff;
+}
+.vocab-list-word {
+	display:inline;
+	font-size:16px;
+}
+.vocab-list-reading {
+	display:inline;
+	font-size:12px;
+	color:#999999;
+}
+.vocab-list-type {
+	display:inline;
+	font-size:12px;
+	color:#999999;
+}
+.vocab-list-def {
+	display:inline;
+	font-size:12px;
+	color:#000000;
+}
+.large-kanji {
+	display:inline-block;
+	font-size:40px; line-height:40px;
+	padding:5px;
+	padding-bottom:8px;
+}
+
+/****************** VIEW WORD PAGE ******************/
+
+#view-word {
+	z-index:2;
+	margin-left:110%;
+}
+#view-word .sub-page {
+	background-color:#ffffff;
+	text-align:center;
+	margin-top:100px;
+	margin-left:0%;
+}
+
+
+/****************** SETTINGS PAGE ******************/
+
+#settings-page {
+	z-index:2;
+	margin-left:110%;
+}
+#settings-page .sub-page {
+	padding-top:20px;
+	padding-left:20px; padding-right:20px;
+	background-color:#ffffff;
+}
+#settings-pg1 {
+	line-height:30px;
+	z-index:2;
+}
+#settings-pg2 {
+	margin-left:110%;
+	z-index:3;
+}
+.settings-pg-btn {
+	cursor:pointer;
+	display:inline-block;
+}
+
+/****************** HEADER ******************/
+
+#header-bar, #footer-bar {
+	position:fixed; display:block;
+	width:100%;
+	background-color:#008A8A;
+	left:0px;
+	padding-left:0px;
+	z-index:100;
+	overflow:hidden;
+}
+#header-bar a, #footer-bar a {
+	color:#ffffff;
+	font-family:'Muli',sans-serif;
+	line-height:40px;
+}
+#header-bar {
+	top:0px;
+	height:64px;
+	padding-top:20px;
+}
+.header-title {
+	position:absolute; display:block;
+	width:100%; height:100%;
+	text-align:center;
+	top:0px; left:0px;
+	margin-top:30px;
+	color:#ffffff;
+	font-weight:bold;
+	font-size:18px;
+}
+.glyphicon.glyphicon-menu-hamburger {
+	position:absolute; display:block;
+	font-size:16px!important;
+	width:46px; height:60px;
+	text-align:center;
+	line-height:60px;
+	padding-top:12px; margin-left:0px;
+	bottom:0px;
+	box-sizing:border-box;
+	color:#ffffff;
+}
+#header-btn-area {
+	position:fixed; display:block;
+	width:60px; height:64px;
+	top:0px; left:0px;
+	z-index:200;
+}
+#status-bar-guide {
+	display:block; position:absolute;
+	width:100%; height:20px;
+	background-color:#000000;
+	top:0px; left:0px;
+	z-index:200;
+	opacity:0;
+}
+
+
+/****************** FOOTER ******************/
+
+#footer-bar {
+	bottom:0px;
+	height:46px;
+}
+.footer-btn {
+	display:inline-block; position:relative;
+	height:46px;
+	line-height:46px;
+	color:#ffffff;
+	float:right;
+	margin-right:10px;
+}
+.glyphicon.glyphicon-plus {
+	position:absolute;
+	left:0px; bottom:0px;
+	height:46px; width:46px;
+	line-height:44px;
+	text-align:center;
+	color:#ffffff;
+	font-size:18px;
+	margin-left:0px;
+}
+#footer-btn-area {
+	position:fixed; display:block;
+	width:46px; height:46px;
+	bottom:0px; left:0px;
+	z-index:200;
+}
+
+
+/****************** SIDEBAR ******************/
+
+#sidebar {
+	display:block; position:absolute;
+	width:180px; height:100%;
+	left:0px; top:0px;
+	z-index:0;
+	padding-top:100px; padding-left:10px;
+}
+.sidebar-item {
+	display:inline-block; position:relative;
+	color:#ffffff;
+	font-size:16px;
+	width:100%;
+	line-height:28px;
+	z-index:1;
+}
+#close-sidebar-area {
+	display:block; position:absolute;
+	width:100%; height:100%;
+	left:0px; top:0px;
+	padding:0px; margin:0px;
+	background-color:#000000;
+	display:none; opacity:0;
+	z-index:100;
+}
